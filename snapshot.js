@@ -8,7 +8,6 @@ const serviceMap = {
 	7341: 'https://rpc.shyft.network/'
 };
 
-
 const chainid = process.argv[2];
 if (chainid in serviceMap) {
 	providerUrl = serviceMap[chainid];
@@ -19,7 +18,7 @@ if (chainid in serviceMap) {
 			var blocknum = parseInt(block['number'],16);
 			var ts = Math.round(Date.now()/1000);
 			if (blocknum>3000000) {
-				destFilename = `${destination}/snapsshot-${chainid}.json`;
+				destFilename = `${destination}/snapshot-${chainid}.json`;
 				payload = `{ "timestamp": ${ts}, "blocks": { "${chainid}":${blocknum} } }\n`;
 				fs.writeFile(destFilename, payload, function err(e, d) { if (e) { console.log("Failed to write to "+destFilename+": "+e)} });
 			}
